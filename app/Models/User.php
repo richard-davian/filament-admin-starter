@@ -11,12 +11,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Panel;
+use App\Models\Concerns\HasPublicUuid;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Laravel\Sanctum\HasApiTokens;
+use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 use Illuminate\Support\Facades\Storage;
-use App\Models\Concerns\HasPublicUuid;
 use App\Observers\UserObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
 
 #[Fillable(['name', 'email', 'password', 'avatar_url', 'uuid', 'username', 'tenant_id'])]
 #[Hidden(['password', 'remember_token'])]
@@ -24,7 +27,7 @@ use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasRoles, HasPublicUuid;
+    use HasFactory, Notifiable, HasRoles, HasPublicUuid, HasApiTokens, TwoFactorAuthenticatable;
 
     /**
      * Get the attributes that should be cast.
