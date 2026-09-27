@@ -86,10 +86,15 @@ class AdminPanelProvider extends PanelProvider
                     ->enableTwoFactorAuthentication(
                         force: false,
                     )
-                    ->enableSanctumTokens()
+                    ->enableSanctumTokens(
+                        permissions: ['create', 'view', 'update', 'delete']
+                    )
                     ->enableBrowserSessions(condition: true)
                     ->enablePasskeys(
                         relyingPartyName: config('app.name'),
+                        relyingPartyId: config('app.url'),
+                        relyingPartyIcon: asset('images/logo.webp'),
+                        scopeToPanel: true,
                     ),
             ])
             ->sidebarCollapsibleOnDesktop()
