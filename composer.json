@@ -15,6 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "marjose123/filament-lockscreen": "*",
+        "shuvroroy/filament-spatie-laravel-backup": "^4.0",
         "stechstudio/filament-impersonate": "^5.6",
         "swisnl/filament-backgrounds": "^2.0"
     },

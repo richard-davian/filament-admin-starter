@@ -19,9 +19,11 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use lockscreen\FilamentLockscreen\Lockscreen;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Swis\Filament\Backgrounds\ImageProviders\Triangles;
@@ -102,6 +104,10 @@ class AdminPanelProvider extends PanelProvider
                     // ->showAttribution(false)
                     // ->imageProvider(MyImages::make()->directory('images/backgrounds'))
                     ->imageProvider(Triangles::make()),
+                FilamentSpatieLaravelBackupPlugin::make()
+                    ->navigationGroup('Settings')
+                    ->navigationSort(94)
+                    ->authorize(fn(): bool => Auth::user()?->can('View:Backups') ?? false),
             ])
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('16rem')
