@@ -22,7 +22,9 @@ use BezhanSalleh\FilamentShield\FilamentShieldPlugin;
 use Illuminate\Support\Facades\Storage;
 use lockscreen\FilamentLockscreen\Lockscreen;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
-
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Swis\Filament\Backgrounds\ImageProviders\Triangles;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -96,6 +98,10 @@ class AdminPanelProvider extends PanelProvider
                         relyingPartyIcon: asset('images/logo.webp'),
                         scopeToPanel: true,
                     ),
+                FilamentBackgroundsPlugin::make()
+                    // ->showAttribution(false)
+                    // ->imageProvider(MyImages::make()->directory('images/backgrounds'))
+                    ->imageProvider(Triangles::make()),
             ])
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('16rem')
