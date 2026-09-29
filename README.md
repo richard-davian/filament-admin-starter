@@ -14,9 +14,21 @@ _Template dashboard admin Laravel Filament yang sudah lengkap dan siap pakai. Ti
 [![Tailwind](https://img.shields.io/badge/Tailwind-4.x-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-[Features](#-whats-included) · [Quick Start](#-quick-start) · [Cara Instalasi](#-cara-instalasi-bahasa-indonesia) · [Structure](#-project-structure)
+[Preview](#-preview) · [Features](#-whats-included) · [Quick Start](#-quick-start) · [Cara Instalasi](#-cara-instalasi-bahasa-indonesia) · [Structure](#-project-structure)
 
 </div>
+
+---
+
+## 📸 Preview
+
+**Login**: modern login card with random background, remember me, and passkey sign-in.
+
+<img src="docs/screenshots/login.png" alt="Filament Admin Starter login page with passkey authentication" width="100%">
+
+**Dashboard**: sidebar navigation grouped by User Management and Settings, global search, notifications, and stats widget.
+
+<img src="docs/screenshots/dashboard.png" alt="Filament Admin Starter dashboard with users, roles, tenants, app settings, social media, banners, and backups" width="100%">
 
 ---
 
@@ -138,9 +150,9 @@ Open `http://localhost:8000/admin`
 
 ### Default Login
 
-| Email               | Password   |
-| ------------------- | ---------- |
-| `admin@example.com` | `password` |
+| Email                  | Password   |
+| ---------------------- | ---------- |
+| `superadmin@email.com` | `password` |
 
 > ⚠️ Change the default credentials immediately in production.
 
