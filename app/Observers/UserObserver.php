@@ -19,6 +19,8 @@ class UserObserver
         if ($user->isDirty('avatar_url')) {
             $originalValue = $user->getOriginal('avatar_url');
 
+            if ($this->isGalleryAvatar($originalValue)) return;
+
             if ($originalValue && Storage::disk('public')->exists($originalValue)) {
                 Storage::disk('public')->delete($originalValue);
             }
@@ -28,9 +30,16 @@ class UserObserver
     public function deleting(User $user): void
     {
         if ($user->avatar_url) {
+            if ($this->isGalleryAvatar($user->avatar_url)) return;
+
             if (Storage::disk('public')->exists($user->avatar_url)) {
                 Storage::disk('public')->delete($user->avatar_url);
             }
         }
+    }
+
+    private function isGalleryAvatar(?string $path): bool
+    {
+        return $path && str_starts_with($path, 'avatars/');
     }
 }

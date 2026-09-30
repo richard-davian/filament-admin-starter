@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "248d3d2ab0a0a4e2378c690ff4d5e288",
+    "content-hash": "22f5b3061b57a941b2ecba1bf781aae8",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -4165,6 +4165,55 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.11.0"
             },
             "time": "2026-08-18T06:18:41+00:00"
+        },
+        {
+            "name": "matondojk/filament-avatar-picker",
+            "version": "v4.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/matondojk/filament-avatar-picker.git",
+                "reference": "a39bd6abb52ba629a8b279997e9cdfd18ff5a904"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/matondojk/filament-avatar-picker/zipball/a39bd6abb52ba629a8b279997e9cdfd18ff5a904",
+                "reference": "a39bd6abb52ba629a8b279997e9cdfd18ff5a904",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0|^4.0|^5.0",
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.1"
+            },
+            "type": "filament-plugin",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MatondoJK\\FilamentAvatarPicker\\FilamentAvatarPickerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MatondoJK\\FilamentAvatarPicker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MatondoJK",
+                    "email": "matondo@example.com"
+                }
+            ],
+            "description": "A beautiful, highly-customizable avatar gallery and upload picker component for Filament PHP.",
+            "support": {
+                "issues": "https://github.com/matondojk/filament-avatar-picker/issues",
+                "source": "https://github.com/matondojk/filament-avatar-picker/tree/v4.0.1"
+            },
+            "time": "2026-09-10T14:53:33+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

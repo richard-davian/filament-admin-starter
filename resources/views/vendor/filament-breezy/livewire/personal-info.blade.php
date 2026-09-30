@@ -9,4 +9,7 @@
             </x-filament::button>
         </div>
     </form>
+
+    {{-- CUSTOM: needed to render the avatar-picker modal --}}
+    <x-filament-actions::modals />
 </x-filament::section>

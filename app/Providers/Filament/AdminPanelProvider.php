@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use lockscreen\FilamentLockscreen\Lockscreen;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
+use MatondoJK\FilamentAvatarPicker\Components\AvatarPicker;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
@@ -99,7 +100,8 @@ class AdminPanelProvider extends PanelProvider
                         relyingPartyId: config('app.url'),
                         relyingPartyIcon: asset('images/logo.webp'),
                         scopeToPanel: true,
-                    ),
+                    )
+                    ->avatarUploadComponent(fn() => AvatarPicker::make('avatar_url')->label('Avatar')),
                 FilamentBackgroundsPlugin::make()
                     // ->showAttribution(false)
                     // ->imageProvider(MyImages::make()->directory('images/backgrounds'))

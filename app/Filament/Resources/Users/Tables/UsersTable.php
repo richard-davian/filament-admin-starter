@@ -32,6 +32,7 @@ class UsersTable
 
                 TextColumn::make('email')
                     ->label('Email')
+                    ->copyable()
                     ->searchable()
                     ->sortable(),
 
