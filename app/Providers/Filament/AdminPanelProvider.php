@@ -28,6 +28,8 @@ use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Swis\Filament\Backgrounds\ImageProviders\Triangles;
+use Saade\FilamentFacehash\FacehashPlugin;
+use Saade\FilamentFacehash\FacehashProvider;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -110,7 +112,9 @@ class AdminPanelProvider extends PanelProvider
                     ->navigationGroup('Settings')
                     ->navigationSort(94)
                     ->authorize(fn(): bool => Auth::user()?->can('View:Backups') ?? false),
+                FacehashPlugin::make(),
             ])
+            ->defaultAvatarProvider(FacehashProvider::class)
             ->sidebarCollapsibleOnDesktop()
             ->sidebarWidth('16rem')
             ->databaseNotifications()
