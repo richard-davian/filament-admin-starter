@@ -23,13 +23,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use lockscreen\FilamentLockscreen\Lockscreen;
 use Jeffgreco13\FilamentBreezy\BreezyCore;
-use MatondoJK\FilamentAvatarPicker\Components\AvatarPicker;
 use ShuvroRoy\FilamentSpatieLaravelBackup\FilamentSpatieLaravelBackupPlugin;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Swis\Filament\Backgrounds\ImageProviders\Triangles;
 use Saade\FilamentFacehash\FacehashPlugin;
 use Saade\FilamentFacehash\FacehashProvider;
+use MatondoJK\FilamentAvatarPicker\Components\AvatarPicker;
 
 class AdminPanelProvider extends PanelProvider
 {
