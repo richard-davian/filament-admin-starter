@@ -19,11 +19,11 @@ class UserForm
         return $schema
             ->components([
                 FileUpload::make('avatar_url')
-                    ->label('Photo')
+                    ->label('Avatar')
                     ->nullable()
                     ->image()
                     ->disk('public')
-                    ->directory('avatars')
+                    ->directory('custom-avatars')
                     ->maxSize(2048)
                     ->openable()
                     ->downloadable()

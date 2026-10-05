@@ -52,11 +52,6 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->avatar_url ? Storage::disk('public')->url($this->avatar_url) : null;
     }
 
-    public function tenant()
-    {
-        return $this->belongsTo(Tenant::class);
-    }
-
     public function canImpersonate(): bool
     {
         return $this->hasRole('super_admin');
@@ -65,5 +60,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function canBeImpersonated(): bool
     {
         return ! $this->hasRole('super_admin');
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

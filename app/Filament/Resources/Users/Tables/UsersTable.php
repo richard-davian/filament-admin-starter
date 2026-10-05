@@ -18,7 +18,7 @@ class UsersTable
             ->defaultSort('created_at', 'desc')
             ->columns([
                 ImageColumn::make('avatar_url')
-                    ->label('Photo')
+                    ->label('Avatar')
                     ->disk('public')
                     ->imageWidth(50)
                     ->imageHeight(50)

@@ -7,33 +7,31 @@ use Illuminate\Support\Facades\Storage;
 
 class UserObserver
 {
+    private const array FILE_COLUMNS = ['avatar_url'];
+
     public function creating(User $user): void
     {
-        if (empty($user->username) && !empty($user->email)) {
-            $user->username = strstr($user->email, '@', true);
-        }
+        $user->username ??= strstr((string) $user->email, '@', true) ?: null;
     }
 
-    public function updating(User $user): void
+    public function updated(User $user): void
     {
-        if ($user->isDirty('avatar_url')) {
-            $originalValue = $user->getOriginal('avatar_url');
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($this->isGalleryAvatar($user->getOriginal($column))) continue;
 
-            if ($this->isGalleryAvatar($originalValue)) return;
-
-            if ($originalValue && Storage::disk('public')->exists($originalValue)) {
-                Storage::disk('public')->delete($originalValue);
+            if ($user->wasChanged($column) && $user->getOriginal($column)) {
+                Storage::disk('public')->delete($user->getOriginal($column));
             }
         }
     }
 
-    public function deleting(User $user): void
+    public function deleted(User $user): void
     {
-        if ($user->avatar_url) {
-            if ($this->isGalleryAvatar($user->avatar_url)) return;
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($this->isGalleryAvatar($user->{$column})) continue;
 
-            if (Storage::disk('public')->exists($user->avatar_url)) {
-                Storage::disk('public')->delete($user->avatar_url);
+            if ($user->{$column}) {
+                Storage::disk('public')->delete($user->{$column});
             }
         }
     }

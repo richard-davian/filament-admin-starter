@@ -44,14 +44,8 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->favicon(function () {
-                $favicon = appSettings()->favicon_url;
-                return $favicon ? Storage::disk('public')->url($favicon) : asset('images/favicon.webp');
-            })
-            ->brandName(function () {
-                $appName = appSettings()->app_name;
-                return $appName ? $appName : 'App Name';
-            })
+            ->favicon(fn() => ($favicon = appSettings()->favicon_url) ? Storage::disk('public')->url($favicon) : asset('images/favicon.png'))
+            ->brandName(fn() => ($appName = appSettings()->app_name) ? $appName : 'App Name')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([

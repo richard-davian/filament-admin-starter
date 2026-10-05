@@ -11,15 +11,15 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->uuid('uuid')->unique()->after('id');
             $table->string('username')->unique()->after('name');
-            $table->foreignId('tenant_id')->nullable()->constrained()->nullOnDelete()->after('password');
-            $table->string('avatar_url')->nullable()->after('tenant_id');
+            $table->string('avatar_url')->nullable()->after('password');
+            $table->foreignId('tenant_id')->nullable()->constrained()->nullOnDelete()->after('avatar_url');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['uuid', 'username', 'tenant_id', 'avatar_url']);
+            $table->dropColumn(['uuid', 'username', 'avatar_url', 'tenant_id']);
             $table->dropForeign(['tenant_id']);
         });
     }

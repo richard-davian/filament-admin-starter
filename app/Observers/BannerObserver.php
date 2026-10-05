@@ -7,22 +7,22 @@ use Illuminate\Support\Facades\Storage;
 
 class BannerObserver
 {
-    public function updating(Banner $banner): void
-    {
-        if ($banner->isDirty('image_path')) {
-            $originalValue = $banner->getOriginal('image_path');
+    private const array FILE_COLUMNS = ['image_path'];
 
-            if ($originalValue && Storage::disk('public')->exists($originalValue)) {
-                Storage::disk('public')->delete($originalValue);
+    public function updated(Banner $banner): void
+    {
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($banner->wasChanged($column) && $banner->getOriginal($column)) {
+                Storage::disk('public')->delete($banner->getOriginal($column));
             }
         }
     }
 
-    public function deleting(Banner $banner): void
+    public function deleted(Banner $banner): void
     {
-        if ($banner->image_path) {
-            if (Storage::disk('public')->exists($banner->image_path)) {
-                Storage::disk('public')->delete($banner->image_path);
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($banner->{$column}) {
+                Storage::disk('public')->delete($banner->{$column});
             }
         }
     }

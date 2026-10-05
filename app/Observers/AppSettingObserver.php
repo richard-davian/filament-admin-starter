@@ -7,36 +7,22 @@ use Illuminate\Support\Facades\Storage;
 
 class AppSettingObserver
 {
-    public function updating(AppSetting $appSetting): void
+    private const array FILE_COLUMNS = ['logo_url', 'favicon_url'];
+
+    public function updated(AppSetting $appSetting): void
     {
-        if ($appSetting->isDirty('logo_url')) {
-            $originalValue = $appSetting->getOriginal('logo_url');
-
-            if ($originalValue && Storage::disk('public')->exists($originalValue)) {
-                Storage::disk('public')->delete($originalValue);
-            }
-        }
-
-        if ($appSetting->isDirty('favicon_url')) {
-            $originalValue = $appSetting->getOriginal('favicon_url');
-
-            if ($originalValue && Storage::disk('public')->exists($originalValue)) {
-                Storage::disk('public')->delete($originalValue);
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($appSetting->wasChanged($column) && $appSetting->getOriginal($column)) {
+                Storage::disk('public')->delete($appSetting->getOriginal($column));
             }
         }
     }
 
-    public function deleting(AppSetting $appSetting): void
+    public function deleted(AppSetting $appSetting): void
     {
-        if ($appSetting->logo_url) {
-            if (Storage::disk('public')->exists($appSetting->logo_url)) {
-                Storage::disk('public')->delete($appSetting->logo_url);
-            }
-        }
-
-        if ($appSetting->favicon_url) {
-            if (Storage::disk('public')->exists($appSetting->favicon_url)) {
-                Storage::disk('public')->delete($appSetting->favicon_url);
+        foreach (self::FILE_COLUMNS as $column) {
+            if ($appSetting->{$column}) {
+                Storage::disk('public')->delete($appSetting->{$column});
             }
         }
     }
