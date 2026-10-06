@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 
 class UserObserver
 {
-    private const array FILE_COLUMNS = ['avatar_url'];
+    private const array FILE_COLUMNS = ['avatar_url' => ['disk' => 'public']];
 
     public function creating(User $user): void
     {
@@ -16,22 +16,22 @@ class UserObserver
 
     public function updated(User $user): void
     {
-        foreach (self::FILE_COLUMNS as $column) {
+        foreach (self::FILE_COLUMNS as $column => $options) {
             if ($this->isGalleryAvatar($user->getOriginal($column))) continue;
 
             if ($user->wasChanged($column) && $user->getOriginal($column)) {
-                Storage::disk('public')->delete($user->getOriginal($column));
+                Storage::disk($options['disk'])->delete($user->getOriginal($column));
             }
         }
     }
 
     public function deleted(User $user): void
     {
-        foreach (self::FILE_COLUMNS as $column) {
+        foreach (self::FILE_COLUMNS as $column => $options) {
             if ($this->isGalleryAvatar($user->{$column})) continue;
 
             if ($user->{$column}) {
-                Storage::disk('public')->delete($user->{$column});
+                Storage::disk($options['disk'])->delete($user->{$column});
             }
         }
     }

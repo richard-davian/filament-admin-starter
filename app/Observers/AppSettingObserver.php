@@ -7,22 +7,25 @@ use Illuminate\Support\Facades\Storage;
 
 class AppSettingObserver
 {
-    private const array FILE_COLUMNS = ['logo_url', 'favicon_url'];
+    private const array FILE_COLUMNS = [
+        'logo_url'    => ['disk' => 'public'],
+        'favicon_url' => ['disk' => 'public']
+    ];
 
     public function updated(AppSetting $appSetting): void
     {
-        foreach (self::FILE_COLUMNS as $column) {
+        foreach (self::FILE_COLUMNS as $column => $options) {
             if ($appSetting->wasChanged($column) && $appSetting->getOriginal($column)) {
-                Storage::disk('public')->delete($appSetting->getOriginal($column));
+                Storage::disk($options['disk'])->delete($appSetting->getOriginal($column));
             }
         }
     }
 
     public function deleted(AppSetting $appSetting): void
     {
-        foreach (self::FILE_COLUMNS as $column) {
+        foreach (self::FILE_COLUMNS as $column => $options) {
             if ($appSetting->{$column}) {
-                Storage::disk('public')->delete($appSetting->{$column});
+                Storage::disk($options['disk'])->delete($appSetting->{$column});
             }
         }
     }
