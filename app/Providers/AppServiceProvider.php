@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Middleware\TrustProxies;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         if (!app()->environment('local')) {
             URL::forceScheme('https');
+        }
+
+        if (app()->environment('local')) {
+            TrustProxies::at('*');
         }
     }
 }
