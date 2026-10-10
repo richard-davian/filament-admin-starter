@@ -17,6 +17,7 @@ class BannerForm
                     ->label('Image')
                     ->required()
                     ->image()
+                    ->imageEditor()
                     ->disk('public')
                     ->directory('banners')
                     ->maxSize(2048)
@@ -31,12 +32,10 @@ class BannerForm
 
                 TextInput::make('subtitle')
                     ->label('Subtitle')
-                    ->nullable()
                     ->maxLength(255),
 
                 TextInput::make('link_url')
                     ->label('Link URL')
-                    ->nullable()
                     ->url()
                     ->maxLength(255)
                     ->prefixIcon('heroicon-o-link'),

@@ -74,15 +74,21 @@ class AppSettingPage extends Page implements HasForms
                                     FileUpload::make('logo_url')
                                         ->label('Logo')
                                         ->image()
+                                        ->imageEditor()
                                         ->disk('public')
                                         ->directory('settings')
+                                        ->openable()
+                                        ->downloadable()
                                         ->helperText('Format PNG atau JPG. Disarankan bentuk persegi atau landscape.'),
 
                                     FileUpload::make('favicon_url')
                                         ->label('Favicon')
                                         ->image()
+                                        ->imageEditor()
                                         ->disk('public')
                                         ->directory('settings')
+                                        ->openable()
+                                        ->downloadable()
                                         ->helperText('Ikon kecil yang tampil di tab browser. Disarankan ukuran 32x32px, format PNG atau ICO.'),
                                 ]),
 

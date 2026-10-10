@@ -20,8 +20,8 @@ class UserForm
             ->components([
                 FileUpload::make('avatar_url')
                     ->label('Avatar')
-                    ->nullable()
                     ->image()
+                    ->imageEditor()
                     ->disk('public')
                     ->directory('custom-avatars')
                     ->maxSize(2048)
@@ -68,14 +68,12 @@ class UserForm
 
                 Select::make('tenant_id')
                     ->label('Tenant')
-                    ->nullable()
                     ->relationship('tenant', 'name')
                     ->searchable()
                     ->preload(),
 
                 Select::make('roles')
                     ->label('Roles')
-                    ->nullable()
                     ->multiple()
                     ->preload()
                     ->searchable()
