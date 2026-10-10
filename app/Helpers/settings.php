@@ -1,11 +1,20 @@
 <?php
 
 use App\Models\AppSetting;
-use App\Models\AppSeoSetting;
 
 if (! function_exists('appSettings')) {
-    function appSettings(): AppSetting
+    function appSettings(?string $key = null, mixed $default = null): mixed
     {
-        return AppSetting::firstOrCreate(['id' => 1]);
+        static $settings = null;
+
+        $settings ??= AppSetting::firstOrCreate(['id' => 1]);
+
+        if ($key === null) {
+            return $settings;
+        }
+
+        $value = $settings->getAttribute($key);
+
+        return filled($value) ? $value : value($default);
     }
 }
